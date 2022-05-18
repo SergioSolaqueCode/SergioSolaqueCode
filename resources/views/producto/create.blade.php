@@ -3,24 +3,37 @@
 @section('contenido')
 <h1 class="">Nuevo Producto</h1>
 <div class="row">
-    <form method="POST" action="{{route('producto.store')}}"class="col s12">
+    <form method
+    ="POST" action="{{route('producto.store')}}"class="col s12">
       @csrf
+      @if(session('mensaje'))
+      <div class="row">
+        <div class="col-s8">
+          <span class="validate" class="teal-text text-accent-3">
+            {{session('mensaje')}}
+          </spam>
+        </div>
+      </div>    
+      @endif
       <div class="row">
         <div class="input-field col s8">
           <input id="nombre" name="nombre" type="text" class="validate">
           <label for="nombre">Nompre de producto</label>
+          <span>{{ $errors->first('nombre')}}</span>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s8">
           <textarea id="desc" class="materialize-textarea" name="desc"></textarea>
-          <label for="desc">Descripcion  </label>         
+          <label for="desc">Descripcion  </label>
+          <span>{{ $errors->first('desc')}}</span>       
         </div>
       </div>
       <div class="row">
         <div class="input-field col s8">
           <input id="precio" type="number" class="validate" name="precio">
           <label for="precio">Precio</label>
+          <span>{{ $errors->first('precio')}}</span>
         </div>
       </div>
       <div class="row">
@@ -43,6 +56,8 @@
       @foreach($categoria as $categorias)
       <option value="{{ $categorias->id}}">{{$categorias->nombre}}</option>
       @endforeach
+      <label>Materialize Select</label>
+      <span>{{ $errors->first('categoria')}}</span>
       </select>
       <select name="marca">
       <option value="" disabled selected>Elija una Marca</option>
@@ -51,11 +66,12 @@
       @endforeach
     </select>
     <label>Materialize Select</label>
+    <span>{{ $errors->first('marca')}}</span>
   </div>
             </div>
             <div class="row">
             <button class="btn waves-effect waves-light" type="Summit" name="action">Guardar
-  </button>
+            </button>
           </div>
         </div>
       </div>

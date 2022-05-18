@@ -6,6 +6,8 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use App\Models\Marca;
 use App\Models\Categoria;
+use App\Http\Request\StoreProductoRequest;
+use Illuminate\Support\Facades\Validator;
 
 
 class ProductoController extends Controller
@@ -46,10 +48,36 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-       // echo"</pre>";
-        //var_dump($request->all());
-        //echo"</pre>";
-        //crear una entidad >>producto>>
+        /*$reglas =
+        [
+            "nombre" => 'required|alpha',
+            "desc" => 'required|max:100',
+            "precio" => 'required|numeric|max:10000'
+        ];
+
+    $mensajes_personalizados=
+    [
+        'required' => 'dato obligatorio',
+        'alpha' =>'solo letras',
+        'max' => 'solo maximo 100 numeros',
+        'numeric' =>'el dato tiene que ser numerico'
+    ];   
+
+    //2. crear el objeto validador
+    $v= Validator::make($request->all(), 
+                                        $reglas,
+                                        $mensajes_personalizados
+                                        );
+    //3. validar
+    if($v ->fails())
+    {
+         //validacion fallida
+         //redirigir
+         return redirect('producto/create')
+                    ->withErrors($v);
+    }else
+    {*/
+        //validacion exitosa
         $p = new Producto();
         $p-> nombre = $request->nombre;
         $p-> descripccion = $request->desc;
@@ -57,7 +85,17 @@ class ProductoController extends Controller
         $p-> marcas_id = $request->marca;
         $p-> categorias_id = $request->categoria;
         $p->save();
-        echo "producto registro";
+       //rerideccionar: a una ruta disponible
+       return redirect('producto/create')
+       ->with('mensaje', "producto registrado exitosamente");
+    
+        
+    
+       // echo"</pre>";
+        //var_dump($request->all());
+        //echo"</pre>";
+        //crear una entidad >>producto>>
+              
     }
 
     /**
