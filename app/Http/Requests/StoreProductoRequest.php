@@ -25,11 +25,12 @@ class StoreProductoRequest extends FormRequest
     {
         return 
         [
-            "nombre" => 'required|alpha',
+            "nombre" => 'required|alpha|unique:productos,nombre',
             "desc" => 'required|max:100',
             "precio" => 'required|numeric|max:10000',
             "marca" => 'required',
-            "categoria" => 'required'
+            "categoria" => 'required',
+            'imagen' => 'required|image'
         ];
     }
 
@@ -43,6 +44,9 @@ class StoreProductoRequest extends FormRequest
             'alpha' => 'Solo letras',
             'max' => 'máximo :max carácteres',
             'numeric' => 'Solo números',
+            'unique' => 'producto ya registrado, registre uno nuevo',
+            'image' => 'debe ser imagen'
+
         ];
     }
 

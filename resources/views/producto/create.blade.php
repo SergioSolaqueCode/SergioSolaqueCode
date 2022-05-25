@@ -4,7 +4,7 @@
 <h1 class="">Nuevo Producto</h1>
 <div class="row">
     <form method
-    ="POST" action="{{route('producto.store')}}"class="col s12">
+    ="POST" action="{{route('producto.store')}}"class="col s12" enctype="multipart/form-data">
       @csrf
       @if(session('mensaje'))
       <div class="row">
@@ -18,7 +18,7 @@
       <div class="row">
         <div class="input-field col s8">
           <input id="nombre" name="nombre" type="text" class="validate">
-          <label for="nombre">Nompre de producto</label>
+          <label for="nombre">Nombre de producto</label>
           <span>{{ $errors->first('nombre')}}</span>
         </div>
       </div>
@@ -34,16 +34,6 @@
           <input id="precio" type="number" class="validate" name="precio">
           <label for="precio">Precio</label>
           <span>{{ $errors->first('precio')}}</span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s8">
-          <div class="file-field input-field">
-            <div class="btn">
-              <span>Imagen de producto</span>
-              <input type="file" name="imagen">
-            </div>         
-          </div>
         </div>
       </div>
       
@@ -67,7 +57,18 @@
     </select>
     <label>Materialize Select</label>
     <span>{{ $errors->first('marca')}}</span>
-  </div>
+    </div>
+      <div class="row">
+          <div class="file-field input-field col s8" >
+            <div class="btn">
+              <span>Imagen de Producto...</span>
+              <input type="file" name="imagen" >
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+        </div>
+      </div>
             </div>
             <div class="row">
             <button class="btn waves-effect waves-light" type="Summit" name="action">Guardar
@@ -77,4 +78,5 @@
       </div>
     </form>
   </div>
+  
   @endsection()
