@@ -89,11 +89,11 @@ class ProductoController extends Controller
         $p-> precio = $request->precio;
         $p-> marcas_id = $request->marca;
         $p-> categorias_id = $request->categoria;
+        
         $archivo =$request->imagen;
         $p->imagen = $archivo->getClientOriginalName();
-        $ruta = public_path()."/img";
-        //mover el archivo cargado al carpeta public/img
-        $request->imagen->move(ruta,
+                //mover el archivo cargado al carpeta public/img
+        $archivo->move(public_path()."/img",
                 $archivo->getClientOriginalName());
         //var_dump($request->imagen->getClienteOriginalName());
         
